@@ -13,11 +13,11 @@
         select * from notice
         where notice_id=#{noticeId};
     </select>
-    <insert id="insertNotice" useGeneratedKeys="true" keyProperty="noticeId">
+    <insert id="insertNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="noticeId">
         insert into notice
-        (notice_id,notice_title,notice_content,notice_create_time)
+        (notice_title,notice_content,notice_create_time)
         values
-        (#{noticeId},#{noticeTitle},#{noticeContent},#{noticeCreateTime});
+        (#{noticeTitle},#{noticeContent},#{noticeCreateTime});
     </insert>
     <update id="updateNotice" parameterType="Notice">
         update notice
@@ -29,4 +29,11 @@
         </set>
         where notice_id = #{noticeId,jdbcType=INTEGER}
     </update>
+    <select id="getCount" resultType="int">
+        select count(*) from notice;
+    </select>
+    <delete id="deleteNoticeById">
+        delete from notice
+        where notice_id=#{noticeId};
+    </delete>
 </mapper>

@@ -8,12 +8,12 @@ import java.util.List;
 
 @Mapper
 public interface NoticeMapper {
-    public List<Notice> selectAllNotices();
-    public List<Notice> selectNoticesByLimit(@Param(value="limit") Integer limit);
-    public Notice selectNoticeById(@Param(value="noticeId") Integer noticeId);
-    public Integer updateNotice(Notice notice);
-    public void deleteNoticeById(@Param(value="noticeId") Integer noticeId);
-    public void insertNotice(@Param(value="notice") Notice notice);
-
+    List<Notice> selectAllNotices();
+    List<Notice> selectNoticesByLimit(@Param(value="limit") Integer limit);
+    Notice selectNoticeById(@Param(value="noticeId") Integer noticeId);
+    Integer updateNotice(Notice notice);
+    void deleteNoticeById(@Param(value="noticeId") Integer noticeId);
+    Integer insertNotice(Notice notice);
+    Integer getCount();
 
 }

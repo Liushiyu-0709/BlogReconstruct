@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sherry.mapper.SuppliesMapper">
+    <select id="selectAllSupplies" resultType="Supplies">
+        select * from supplies;
+    </select>
+    <insert id="insertSupplies" parameterType="Supplies">
+        insert into supplies
+        (supplies_content,remain_count,distribute_count,supplies_amount,supplies_introduction)
+        values
+            (#{suppliesContent},#{remainCount},#{distributeCount},#{suppliesAmount},#{suppliesIntroduction});
+    </insert>
+    <update id="updateSupplies" parameterType="Supplies">
+        update supplies
+        <set>
+            <if test="suppliesId != null">supplies_id = #{suppliesId},</if>
+            <if test="suppliesContent != null">supplies_content = #{suppliesContent},</if>
+            <if test="remainCount != null">remain_count = #{remainCount},</if>
+            <if test="distributeCount != null">distribute_count = #{distributeCount},</if>
+            <if test="suppliesAmount != null">supplies_amount = #{suppliesAmount},</if>
+            <if test="suppliesIntroduction != null">supplies_introduction = #{suppliesIntroduction},</if>
+        </set>
+        where supplies_id = #{suppliesId,jdbcType=INTEGER}
+    </update>
+<!--    <delete id="deleteResidentById" parameterType="int">-->
+<!--        delete from resident-->
+<!--        where resident_id = #{residentId};-->
+<!--    </delete>-->
+    <select id="getMaxId" resultType="int">
+        select max(supplies_id) from supplies;
+    </select>
+
+    <delete id="deleteSuppliesById" parameterType="int">
+        delete from supplies
+        where supplies_id = #{suppliesId};
+    </delete>
+
+    <select id="getSuppliesById" parameterType="int" resultType="Supplies">
+        select * from supplies
+        where supplies_id = #{suppliesId};
+    </select>
+</mapper>

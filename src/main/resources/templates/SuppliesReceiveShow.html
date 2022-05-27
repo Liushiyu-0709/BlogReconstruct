@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet"  media="all">
+</head>
+<body>
+<h1>未领取人群列表</h1>
+<table class="layui-table">
+    <colgroup>
+        <col width="150">
+        <col width="200">
+        <col width="350">
+        <col>
+        <col>
+    </colgroup>
+    <thead>
+    <tr>
+        <th th:text="人员Id"></th>
+        <th th:text="姓名"></th>
+        <th th:text="性别"></th>
+        <th th:text="联系方式"></th>
+        <th th:text="操作"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="resident:${unResidentList}">
+        <td th:text="${resident.residentId}"></td>
+        <td th:text="${resident.residentName}"></td>
+        <td th:text="${resident.residentSex}"></td>
+        <td th:text="${resident.residentPhonenumber}"></td>
+        <td>
+            <a href="javascript:void(0)"
+               class="layui-btn  layui-btn-mini">发起提醒</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

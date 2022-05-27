@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sherry.mapper.ResidentSuppliesRefMapper">
+    <insert id="insertRecord" parameterType="ResidentSuppliesRef">
+        insert into resident_supplies_ref
+        (resident_id,supplies_id,get_situation)
+        values
+            (#{residentId},#{suppliesId},#{getSituation});
+    </insert>
+    <update id="updateRecord" parameterType="ResidentSuppliesRef">
+        update resident_supplies_ref
+        <set>
+            <if test="residentId != null">resident_id = #{residentId},</if>
+            <if test="suppliesId != null">supplies_id = #{suppliesId},</if>
+            <if test="getSituation != null">get_situation = #{getSituation},</if>
+        </set>
+        where resident_id = #{residentId,jdbcType=INTEGER}
+    </update>
+    <select id="getResidentsByCriteria" resultType="Resident">
+        select * from resident
+        where resident_id in(
+        select resident_id from resident_supplies_ref
+        where supplies_id = #{suppliesId} and get_situation = #{getSituation});
+    </select>
+
+    <select id="getSuppliesByCriteria" resultType="Supplies">
+        select * from supplies
+        where supplies_id in(
+            select supplies_id from resident_supplies_ref
+            where resident_id = #{residentId} and get_situation = #{getSituation});
+    </select>
+
+    <delete id="deleteRecordByResidentId" parameterType="int">
+        delete from
+        resident_supplies_ref
+        where resident_id = #{residentId};
+    </delete>
+
+    <delete id="deleteRecordBySuppliesId" parameterType="int">
+        delete from
+        resident_supplies_ref
+        where supplies_id = #{suppliesId};
+    </delete>
+</mapper>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet"  media="all">
+</head>
+<body>
+<form class="layui-form" th:action="@{/updateResident}" th:object="${resident}">
+    <!--    通告标题-->
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>更改人员信息</legend>
+    </fieldset>
+    <input th:field="*{residentId}" name="residentId" type="hidden">
+    <div class="layui-form-item">
+        <label class="layui-form-label">人员姓名：</label>
+        <div class="layui-input-block">
+            <input type="text" th:field="*{residentName}" name="residentName" lay-verify="title" autocomplete="off"  class="layui-input">
+        </div>
+    </div>
+    <!--    通告内容-->
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">性别：</label>
+        <div class="layui-input-block">
+            <input type="radio" name="residentSex" value="男" title="男" th:checked="*{residentSex == '男'}">
+            <input type="radio" name="residentSex" value="女" title="女" th:checked="*{residentSex == '女'}">
+        </div>
+    </div>
+    <!--     通告id-->
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">经过区域：</label>
+        <div class="layui-input-block">
+            <select name="residentVisitedDistrict" lay-verify="">
+                <option value="">请选择风险区</option>
+                <option value="低风险">低风险</option>
+                <option value="中风险">中风险</option>
+                <option value="高风险">高风险</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">居住地址：</label>
+        <div class="layui-input-block">
+            <input type="text" th:field="*{residentAddress}" name="residentAddress" lay-verify="title" autocomplete="off"  class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">联系方式：</label>
+        <div class="layui-input-block">
+            <input type="text" th:field="*{residentPhonenumber}" name="residentPhonenumber" lay-verify="phone" autocomplete="off" placeholder="请输入人员联系方式" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">人员状态</label>
+        <div class="layui-input-block">
+            <input type="radio" name="residentStatus" value=1 title="居民" th:checked="*{residentStatus == 1}">
+            <input type="radio" name="residentStatus" value=0 title="外来人员" th:checked="*{residentStatus == 0}">
+        </div>
+    </div>
+
+    <div class="layui-input-block">
+        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+    </div>
+
+</form>
+<script th:src="@{/layui/layui.js}" charset="utf-8"></script>
+<script>
+    layui.use('form', function(){
+        var form = layui.form; //只有执行了这一步，部分表单元素才会自动修饰成功
+        form.render();
+    });
+</script>
+</body>
+</html>

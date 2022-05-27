@@ -36,3 +36,6 @@ mybatis:
   configuration:
     use-generated-keys: false
     map-underscore-to-camel-case: true
+
+server:
+  max-http-header-size: 102400

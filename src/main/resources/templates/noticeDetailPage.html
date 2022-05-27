@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/layui/css/layui.css}" rel="stylesheet"  media="all">
+    <link th:href="@{assets/images/favicon.ico}" rel="shortcut icon" >
+
+    <!-- App css -->
+    <link th:href="@{assets/css/icons.min.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{assets/css/app.min.css}" rel="stylesheet" type="text/css" />
+</head>
+<style>
+    .vintage{
+        background: #EEE url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAIAAAAmkwkpAAAAHklEQVQImWNkYGBgYGD4//8/A5wF5SBYyAr+//8PAPOCFO0Q2zq7AAAAAElFTkSuQmCC) repeat;
+        text-shadow: 5px -5px black, 4px -4px white;
+        font-weight: bold;
+        font-size: 70px;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text}
+    p {
+        font-size: 28px;
+    }
+</style>
+<body>
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+    <legend>新闻详情页面</legend>
+</fieldset>
+
+<div class="layui-bg-gray" style="padding: 40px;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md10">
+            <div class="layui-panel">
+
+                <div style="padding: 50px 50px; height:90%">
+
+                    <h3 class=vintage th:text="${notice.noticeTitle}"></h3>
+                    <p  th:text="${notice.noticeContent}">
+                        Voluptates, illo, iste itaque voluptas corrupti ratione reprehenderit magni similique? Tempore, quos delectus asperiores
+                        libero voluptas quod perferendis! Voluptate, quod illo rerum? Lorem ipsum dolor sit amet. With supporting text below
+                        as a natural lead-in to additional contenposuere erat a ante.
+                    </p>
+
+                    <div class="layui-row">
+                        <div class="layui-col-md4">
+                            <div>
+                                <h2>发布日期：</h2>
+                                <p th:text="${notice.getStrCreateTime()}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

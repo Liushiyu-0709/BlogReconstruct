@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sherry.mapper.ResidentMapper">
+    <select id="selectAllResidents" resultType="Resident">
+        select * from resident;
+    </select>
+    <insert id="insertResident" parameterType="Resident">
+        insert into resident
+            (resident_name,resident_sex,resident_visited_district,resident_address,resident_phonenumber,resident_status)
+        values
+            (#{residentName},#{residentSex},#{residentVisitedDistrict},#{residentAddress},#{residentPhonenumber},#{residentStatus});
+    </insert>
+    <update id="updateResident" parameterType="Resident">
+        update resident
+        <set>
+            <if test="residentId != null">resident_id = #{residentId},</if>
+            <if test="residentName != null">resident_name = #{residentName},</if>
+            <if test="residentSex != null">resident_sex = #{residentSex},</if>
+            <if test="residentVisitedDistrict != null">resident_visited_district = #{residentVisitedDistrict},</if>
+            <if test="residentAddress != null">resident_address = #{residentAddress},</if>
+            <if test="residentPhonenumber != null">resident_phonenumber = #{residentPhonenumber},</if>
+            <if test="residentStatus != null">resident_status = #{residentStatus},</if>
+        </set>
+        where resident_id = #{residentId,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteResidentById" parameterType="int">
+        delete from resident
+        where resident_id = #{residentId};
+    </delete>
+    <select id="getResidentCount" resultType="int">
+        select count(*) from resident;
+    </select>
+    <select id="getResidentById" parameterType = "int" resultType="Resident">
+        select * from resident
+        where resident_id = #{residentId};
+    </select>
+</mapper>
